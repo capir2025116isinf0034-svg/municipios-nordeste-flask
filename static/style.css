@@ -1,0 +1,166 @@
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f6f4;
+    color: #26352c;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #176b45;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Área principal */
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+/* Seções */
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    color: #176b45;
+    margin-bottom: 20px;
+}
+
+/* Formulário */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    grid-column: 1 / -1;
+}
+
+/* Botões */
+button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #176b45;
+    color: white;
+    cursor: pointer;
+    margin: 3px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.editar {
+    background-color: #d49a20;
+}
+
+.excluir {
+    background-color: #c0392b;
+}
+
+/* Filtros */
+.filtros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.filtros input {
+    max-width: 250px;
+}
+
+/* Tabela */
+.tabela-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #176b45;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f7f3;
+}
+
+/* Mensagens */
+#mensagem {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#total {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Adaptação para celulares */
+@media (max-width: 600px) {
+
+    main {
+        width: 95%;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .filtros {
+        flex-direction: column;
+    }
+
+    .filtros input {
+        max-width: 100%;
+    }
+}

@@ -1,13 +1,42 @@
-# GitHub Codespaces ♥️ Flask
+# AT07 - Manipulação de Municípios do Nordeste
 
-Welcome to your shiny new Codespace running Flask! We've got everything fired up and running for you to explore Flask.
+## Objetivo
+Desenvolver uma aplicação utilizando Flask para cadastrar, listar,
+consultar, atualizar e excluir municípios da região Nordeste.
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
+## Tecnologias utilizadas
+- Python
+- Flask
+- HTML
+- CSS
+- JavaScript
+- Dicionários Python
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+## Funcionalidades
 
-To run this application:
+- Listar todos os municípios.
+- Filtrar municípios por estado.
+- Consultar um município pelo nome.
+- Cadastrar novos municípios.
+- Atualizar informações dos municípios.
+- Excluir municípios.
 
-```
-flask --debug run
-```
+## Como executar
+
+Instale as dependências:
+
+pip install -r requirements.txt
+
+Execute a aplicação:
+
+python app.py
+
+Acesse o endereço local informado pelo Flask.
+
+## Armazenamento dos dados
+
+Os municípios são armazenados em um dicionário Python
+durante a execução da aplicação.
+
+## Atividade
+AT07 - Manipulação de Municípios do Nordeste.

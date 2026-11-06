@@ -1,7 +1,170 @@
-from flask import Flask, render_template
+from flask import Flask, request, jsonify, render_template
 
+# Criando a aplicação Flask
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return render_template("index.html", title="Hello")
+# Dicionário inicial de municípios do Nordeste
+municipios_nordeste_dataset = {
+    "metadados": {
+        "regiao": "Nordeste",
+        "pais": "Brasil",
+        "total_municipios": 30,
+        "fonte_dados_populacao": "IBGE"
+    },
+
+    "municipios": {
+        "Fortaleza": {
+            "id_ibge": 2304400,
+            "estado": "Ceará",
+            "sigla_uf": "CE",
+            "capital": True,
+            "populacao_estimada": 2582360
+        },
+
+        "Salvador": {
+            "id_ibge": 2927408,
+            "estado": "Bahia",
+            "sigla_uf": "BA",
+            "capital": True,
+            "populacao_estimada": 2559945
+        }
+    }
+}
+
+
+# ROTA INICIAL - abre a página principal
+@app.route('/')
+def inicio():
+    return render_template('index.html')
+
+
+# GET - listar todos os municípios ou filtrar por estado
+@app.route('/municipios', methods=['GET'])
+def listar_municipios():
+
+    uf = request.args.get('uf')
+
+    municipios = municipios_nordeste_dataset["municipios"]
+
+    if uf:
+        filtrados = {}
+
+        for nome, dados in municipios.items():
+            if dados["sigla_uf"].upper() == uf.upper():
+                filtrados[nome] = dados
+
+        return jsonify(filtrados)
+
+    return jsonify(municipios)
+
+
+# GET - consultar município pelo nome
+@app.route('/municipios/<nome>', methods=['GET'])
+def consultar_municipio(nome):
+
+    municipios = municipios_nordeste_dataset["municipios"]
+
+    municipio = municipios.get(nome)
+
+    if municipio is None:
+        return jsonify({"erro": "Município não encontrado"}), 404
+
+    return jsonify(municipio)
+
+
+# POST - cadastrar novo município
+@app.route('/municipios', methods=['POST'])
+def cadastrar_municipio():
+
+    dados = request.get_json()
+
+    if not isinstance(dados, dict):
+        return jsonify({"erro": "Envie os dados em formato JSON"}), 400
+
+    nome = dados.get("nome")
+
+    if not isinstance(nome, str) or not nome.strip():
+        return jsonify({"erro": "O nome do município é obrigatório"}), 400
+
+    nome = nome.strip()
+
+    campos_obrigatorios = [
+        "id_ibge",
+        "estado",
+        "sigla_uf",
+        "capital",
+        "populacao_estimada"
+    ]
+
+    for campo in campos_obrigatorios:
+        if campo not in dados:
+            return jsonify({"erro": f"O campo {campo} é obrigatório"}), 400
+
+    municipios = municipios_nordeste_dataset["municipios"]
+
+    if nome in municipios:
+        return jsonify({"erro": "Município já cadastrado"}), 409
+
+    # Criando uma cópia dos dados sem o campo nome
+    novos_dados = dados.copy()
+    novos_dados.pop("nome", None)
+
+    municipios[nome] = novos_dados
+
+    # Atualizando a quantidade de municípios
+    municipios_nordeste_dataset["metadados"]["total_municipios"] = len(municipios)
+
+    return jsonify({
+        "mensagem": "Município cadastrado com sucesso",
+        "municipio": municipios[nome]
+    }), 201
+
+
+# PATCH - atualizar município
+@app.route('/municipios/<nome>', methods=['PATCH'])
+def atualizar_municipio(nome):
+
+    dados = request.get_json()
+
+    if not isinstance(dados, dict) or not dados:
+        return jsonify({"erro": "Envie os dados que deseja atualizar"}), 400
+
+    municipios = municipios_nordeste_dataset["municipios"]
+
+    if nome not in municipios:
+        return jsonify({"erro": "Município não encontrado"}), 404
+
+    # Não permite alterar o nome pela atualização dos dados
+    dados.pop("nome", None)
+
+    municipios[nome].update(dados)
+
+    return jsonify({
+        "mensagem": "Município atualizado com sucesso",
+        "municipio": municipios[nome]
+    })
+
+
+# DELETE - excluir município
+@app.route('/municipios/<nome>', methods=['DELETE'])
+def excluir_municipio(nome):
+
+    municipios = municipios_nordeste_dataset["municipios"]
+
+    if nome not in municipios:
+        return jsonify({"erro": "Município não encontrado"}), 404
+
+    del municipios[nome]
+
+    # Atualizando a quantidade de municípios
+    municipios_nordeste_dataset["metadados"]["total_municipios"] = len(municipios)
+
+    return jsonify({
+        "mensagem": "Município excluído com sucesso"
+    })
+
+
+# Executando a aplicação
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
