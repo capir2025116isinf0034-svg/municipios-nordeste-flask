@@ -66,7 +66,7 @@
                 <input
                     type="text"
                     id="filtroUF"
-                    placeholder="Pesquisar município, estado ou UF (ex: Parnaíba, Piauí ou PI)"
+                    placeholder="Pesquisar município, estado ou UF..."
                 >
 
                 <button type="button" onclick="listarMunicipios()">
@@ -76,6 +76,13 @@
                 <button type="button" onclick="limparFiltro()">
                     Mostrar todos
                 </button>
+
+                <a
+                    href="{{ url_for('baixar_municipios_json') }}"
+                    class="botao-json"
+                >
+                    Baixar arquivo JSON
+                </a>
 
             </div>
 
@@ -308,4 +315,5 @@
     </script>
 
 </body>
+
 </html>

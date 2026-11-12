@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
+from io import BytesIO
+import json
 
 # Criando a aplicação Flask
 app = Flask(__name__)
@@ -28,7 +30,8 @@ municipios_nordeste_dataset = {
             "capital": True,
             "populacao_estimada": 2559945
         },
-         "São Luís": {
+
+        "São Luís": {
             "id_ibge": 2111300,
             "estado": "Maranhão",
             "sigla_uf": "MA",
@@ -261,6 +264,24 @@ def inicio():
     return render_template('index.html')
 
 
+# GET - baixar todos os municípios em formato JSON
+@app.route('/municipios/json', methods=['GET'])
+def baixar_municipios_json():
+
+    arquivo_json = json.dumps(
+        municipios_nordeste_dataset,
+        ensure_ascii=False,
+        indent=4
+    )
+
+    return send_file(
+        BytesIO(arquivo_json.encode('utf-8')),
+        mimetype='application/json',
+        as_attachment=True,
+        download_name='municipios.json'
+    )
+
+
 # GET - listar todos os municípios ou filtrar por nome, UF ou estado
 @app.route('/municipios', methods=['GET'])
 def listar_municipios():
@@ -406,4 +427,4 @@ def excluir_municipio(nome):
 # Executando a aplicação
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
+    

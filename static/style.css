@@ -92,13 +92,34 @@ button:hover {
 /* Filtros */
 .filtros {
     display: flex;
+    align-items: center;
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 15px;
 }
 
 .filtros input {
-    max-width: 250px;
+    flex: 1;
+    min-width: 250px;
+    max-width: none;
+}
+
+/* Link para baixar o JSON */
+.botao-json {
+    display: inline-block;
+    padding: 11px 16px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: #176b45;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.botao-json:hover {
+    background-color: #125638;
 }
 
 /* Tabela */
@@ -158,10 +179,18 @@ footer {
 
     .filtros {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .filtros input {
-        max-width: 100%;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .filtros button,
+    .botao-json {
+        width: 100%;
+        margin: 3px 0;
     }
 }
 
@@ -176,4 +205,3 @@ input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
-
