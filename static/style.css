@@ -1,6 +1,6 @@
-/* =========================================
+/* ==========================================
    CONFIGURAÇÕES GERAIS
-========================================= */
+========================================== */
 
 * {
     margin: 0;
@@ -16,117 +16,159 @@ body {
 }
 
 
-/* =========================================
+/* ==========================================
    CABEÇALHO
-========================================= */
+========================================== */
 
-header {
+.cabecalho {
+    width: 100%;
     background-color: #29466f;
     color: white;
     text-align: center;
     padding: 25px 15px;
 }
 
-header h1 {
+.cabecalho h1 {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 7px;
 }
 
-header p {
-    font-size: 14px;
+.cabecalho p {
+    font-size: 13px;
     color: #e0e7f0;
 }
 
 
-/* =========================================
+/* ==========================================
    CONTEÚDO PRINCIPAL
-========================================= */
+========================================== */
 
 main {
-    width: 94%;
+    width: 95%;
     max-width: 1250px;
     margin: 22px auto;
 }
 
 
-/* =========================================
-   CARTÕES DE INFORMAÇÕES
-========================================= */
+/* ==========================================
+   INFORMAÇÕES GERAIS
+========================================== */
 
 .informacoes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
 .card-info {
     background-color: white;
     border: 1px solid #dedede;
     border-radius: 5px;
-    padding: 14px 16px;
+
+    min-height: 65px;
+    padding: 12px 15px;
 
     display: flex;
     align-items: center;
     gap: 12px;
-
-    min-height: 68px;
 }
+
+
+/* ÍCONES */
 
 .icone {
-    font-size: 18px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
-.card-info div {
+.icone svg {
+    width: 100%;
+    height: 100%;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icone-regiao {
+    color: #269d8b;
+}
+
+.icone-pais {
+    color: #29934f;
+}
+
+.icone-total {
+    color: #526d9b;
+}
+
+.icone-fonte {
+    color: #527aab;
+}
+
+
+/* TEXTOS DOS CARTÕES */
+
+.info-texto {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.card-info small {
+.info-texto small {
     color: #777;
     font-size: 11px;
 }
 
-.card-info strong {
+.info-texto strong {
     color: #333;
     font-size: 13px;
+    font-weight: 600;
 }
 
 
-/* =========================================
+/* ==========================================
    CADASTRO E LISTAGEM
-========================================= */
+========================================== */
 
 .conteudo {
     display: grid;
 
-    /* Duas colunas no computador */
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1.08fr);
 
-    gap: 20px;
+    gap: 18px;
+
     align-items: start;
 }
 
 
-/* =========================================
+/* ==========================================
    SEÇÕES
-========================================= */
+========================================== */
 
-section {
+.formulario,
+.listagem {
     background-color: white;
     border: 1px solid #dedede;
     border-radius: 5px;
     overflow: hidden;
+    min-width: 0;
 }
 
 
-/* =========================================
-   TÍTULOS
-========================================= */
+/* ==========================================
+   TÍTULOS DAS SEÇÕES
+========================================== */
 
-section h2 {
+.formulario h2,
+.listagem h2 {
     background-color: #f5f5f5;
     color: #333;
 
@@ -136,21 +178,21 @@ section h2 {
     padding: 12px 14px;
 
     border-bottom: 1px solid #dedede;
-    margin: 0;
 }
 
 
-/* =========================================
+/* ==========================================
    FORMULÁRIO
-========================================= */
+========================================== */
 
-.formulario form {
-    padding: 14px;
-
+#formMunicipio {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
 
-    gap: 12px;
+    gap: 11px;
+
+    padding: 14px;
 }
 
 
@@ -160,56 +202,65 @@ section h2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    min-width: 0;
 }
 
 .campo label {
-    font-size: 11px;
     color: #444;
+    font-size: 11px;
 }
 
 
-/* CAMPO NOME OCUPA A LINHA TODA */
+/* NOME E ID OCUPAM A LINHA TODA */
 
-.campo-nome {
+.campo-nome,
+.campo-id {
     grid-column: 1 / -1;
 }
 
 
 /* INPUTS */
 
-input,
-select {
+.campo input {
     width: 100%;
-    height: 32px;
+    height: 31px;
 
     padding: 6px 8px;
+
+    background-color: white;
 
     border: 1px solid #d5d5d5;
     border-radius: 4px;
 
-    background-color: white;
-    color: #333;
-
     font-size: 12px;
+    color: #333;
 
     outline: none;
 }
 
 
-/* EFEITO AO CLICAR NO CAMPO */
+/* CAMPOS DESATIVADOS */
 
-input:focus,
-select:focus {
-    border-color: #7ca3d4;
-
-    box-shadow:
-        0 0 3px rgba(41, 70, 111, 0.2);
+.campo input:disabled {
+    background-color: #eeeeee;
+    color: #777;
+    cursor: not-allowed;
 }
 
 
-/* =========================================
-   CAMPO CAPITAL
-========================================= */
+/* FOCO */
+
+.campo input:focus {
+    border-color: #80a6d3;
+
+    box-shadow:
+        0 0 3px rgba(41, 70, 111, 0.18);
+}
+
+
+/* ==========================================
+   CAPITAL
+========================================== */
 
 .campo-capital {
     justify-content: center;
@@ -219,31 +270,38 @@ select:focus {
     display: flex;
     align-items: center;
     gap: 6px;
-    height: 32px;
+
+    height: 31px;
+
+    cursor: pointer;
 }
 
 .checkbox-container input {
-    width: auto;
-    height: auto;
-    accent-color: #3978bd;
+    width: 14px;
+    height: 14px;
+
+    accent-color: #2878c7;
 }
 
 .checkbox-container span {
+    color: #333;
     font-size: 12px;
 }
 
 
-/* =========================================
+/* ==========================================
    BOTÕES DO FORMULÁRIO
-========================================= */
+========================================== */
 
 .botoes-formulario {
     grid-column: 1 / -1;
 
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
 
     gap: 6px;
+
     margin-top: 3px;
 }
 
@@ -254,9 +312,11 @@ button {
     border: none;
     border-radius: 4px;
 
-    padding: 9px 12px;
+    padding: 8px 11px;
 
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
+
     color: white;
 
     cursor: pointer;
@@ -271,12 +331,12 @@ button:hover {
 
 /* SALVAR */
 
-#botaoSalvar {
+.botao-salvar {
     background-color: #39934f;
 }
 
 
-/* BUSCAR POR NOME */
+/* BUSCAR */
 
 .botao-buscar {
     background-color: #2878c7;
@@ -291,57 +351,55 @@ button:hover {
 }
 
 
-/* =========================================
+/* ==========================================
    MENSAGEM
-========================================= */
+========================================== */
 
 #mensagem {
-    padding: 0 14px 14px;
+    padding: 0 14px 12px;
 
-    color: #39794b;
     font-size: 12px;
-    font-weight: bold;
+    color: #39794b;
+    font-weight: 600;
 }
 
 
-/* =========================================
-   LISTAGEM
-========================================= */
-
-.listagem {
-    min-width: 0;
-}
-
-
-/* TÍTULO E BOTÃO CADASTRAR */
+/* ==========================================
+   CABEÇALHO DA LISTAGEM
+========================================== */
 
 .titulo-listagem {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 10px;
+    gap: 8px;
 
     background-color: #f5f5f5;
     border-bottom: 1px solid #dedede;
 }
 
 .titulo-listagem h2 {
-    border: none;
     flex: 1;
+    border: none;
+}
+
+.titulo-listagem .botao-novo {
+    margin-right: 12px;
 }
 
 
-/* =========================================
-   PESQUISA E FILTROS
-========================================= */
+/* ==========================================
+   PESQUISA E FILTRO
+========================================== */
 
 .filtros {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    gap: 12px;
-    padding: 14px;
+    gap: 10px;
+
+    padding: 12px;
 }
 
 .campo-busca,
@@ -349,6 +407,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    min-width: 0;
 }
 
 .campo-busca label,
@@ -357,29 +416,58 @@ button:hover {
     color: #444;
 }
 
+.campo-busca input,
+.campo-filtro input {
+    width: 100%;
+    height: 31px;
 
-/* =========================================
-   TOTAL ENCONTRADO
-========================================= */
+    padding: 6px 8px;
 
-#total {
-    font-size: 11px;
-    color: #666;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
 
-    padding: 0 14px 10px;
+    font-size: 12px;
+
+    outline: none;
+}
+
+.campo-busca input:focus,
+.campo-filtro input:focus {
+    border-color: #80a6d3;
 }
 
 
-/* =========================================
+/* ==========================================
+   RESUMO DA LISTAGEM
+========================================== */
+
+.resumo-listagem {
+    padding: 0 12px 9px;
+}
+
+#total {
+    color: #777;
+    font-size: 11px;
+}
+
+
+/* ==========================================
    TABELA
-========================================= */
+========================================== */
 
 .tabela-container {
     width: 100%;
-    overflow-x: auto;
 
-    padding: 0 10px 10px;
+    overflow: auto;
+
+    /* Mantém a tabela organizada */
+    max-height: 470px;
+
+    border-top: 1px solid #dedede;
 }
+
+
+/* TABELA */
 
 table {
     width: 100%;
@@ -389,13 +477,20 @@ table {
     white-space: nowrap;
 }
 
+
+/* CABEÇALHO E CÉLULAS */
+
 th,
 td {
-    padding: 10px 8px;
+    padding: 9px 7px;
+
     text-align: left;
 
     border-bottom: 1px solid #e6e6e6;
 }
+
+
+/* CABEÇALHO */
 
 th {
     background-color: #f5f5f5;
@@ -403,35 +498,72 @@ th {
 
     font-weight: 600;
 
-    border-top: 1px solid #dedede;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 
-/* EFEITO NAS LINHAS */
+/* LINHAS */
+
+tbody tr {
+    background-color: white;
+}
 
 tbody tr:hover {
-    background-color: #f8f9fb;
+    background-color: #f7f9fc;
 }
 
 
-/* =========================================
+/* MENSAGEM DA TABELA */
+
+.estado-tabela {
+    padding: 22px 12px;
+    text-align: center;
+
+    color: #777;
+}
+
+
+/* ==========================================
    BOTÕES DE AÇÃO
-========================================= */
+========================================== */
 
 .acoes {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
+
+/* BOTÕES */
+
 .acoes button {
-    width: 27px;
-    height: 27px;
+    width: 25px;
+    height: 25px;
 
-    padding: 0;
+    padding: 4px;
 
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 3px;
+}
+
+
+/* ÍCONES DOS BOTÕES */
+
+.acoes svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+    stroke: white;
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 
@@ -449,40 +581,69 @@ tbody tr:hover {
 }
 
 
-/* =========================================
-   DOWNLOAD JSON
-========================================= */
+/* ==========================================
+   BAIXAR JSON
+========================================== */
 
 .area-json {
-    padding: 0 14px 14px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 10px 12px;
 }
 
-.botao-json {
-    display: inline-block;
 
-    padding: 8px 11px;
+/* LINK */
+
+.botao-json {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 7px 10px;
 
     background-color: #29466f;
     color: white;
 
     text-decoration: none;
+
     border-radius: 4px;
 
     font-size: 11px;
 }
+
+
+/* ÍCONE DOWNLOAD */
+
+.botao-json svg {
+    width: 14px;
+    height: 14px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* HOVER */
 
 .botao-json:hover {
     background-color: #1e3658;
 }
 
 
-/* =========================================
+/* ==========================================
    RODAPÉ
-========================================= */
+========================================== */
 
 footer {
     text-align: center;
+
     padding: 18px;
 
     color: #777;
@@ -490,9 +651,9 @@ footer {
 }
 
 
-/* =========================================
-   REMOVER SETINHAS DOS CAMPOS NUMÉRICOS
-========================================= */
+/* ==========================================
+   REMOVER SETAS DOS CAMPOS NUMÉRICOS
+========================================== */
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -506,32 +667,46 @@ input[type="number"] {
 }
 
 
-/* =========================================
+/* ==========================================
    TABLETS E TELAS MENORES
-========================================= */
+========================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
+
 
     main {
         width: 95%;
     }
 
+
+    /* Cadastro e listagem empilhados */
     .conteudo {
         grid-template-columns: 1fr;
     }
 
+
+    /* Cartões */
     .informacoes {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* Altura da tabela */
+    .tabela-container {
+        max-height: 450px;
     }
 
 }
 
 
-/* =========================================
+/* ==========================================
    CELULARES
-========================================= */
+========================================== */
 
 @media (max-width: 550px) {
+
+
+    /* CONTEÚDO */
 
     main {
         width: 95%;
@@ -541,16 +716,16 @@ input[type="number"] {
 
     /* CABEÇALHO */
 
-    header {
-        padding: 20px 12px;
+    .cabecalho {
+        padding: 19px 12px;
     }
 
-    header h1 {
+    .cabecalho h1 {
         font-size: 19px;
         line-height: 1.4;
     }
 
-    header p {
+    .cabecalho p {
         font-size: 12px;
     }
 
@@ -559,34 +734,41 @@ input[type="number"] {
 
     .informacoes {
         gap: 8px;
+        margin-bottom: 13px;
     }
 
     .card-info {
-        padding: 10px;
+        padding: 9px;
         min-height: 58px;
+        gap: 8px;
+    }
+
+    .icone {
+        width: 20px;
+        height: 20px;
     }
 
 
-    /* SEÇÕES */
+    /* CONTEÚDO */
 
     .conteudo {
-        gap: 14px;
+        gap: 13px;
     }
 
 
     /* FORMULÁRIO */
 
-    .formulario form {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    #formMunicipio {
+        gap: 9px;
+        padding: 12px;
     }
 
 
-    /* PESQUISA */
+    /* FILTROS */
 
     .filtros {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 9px;
     }
 
 
@@ -601,18 +783,19 @@ input[type="number"] {
     }
 
     .titulo-listagem .botao-novo {
-        margin: 0 14px 10px;
+        margin: 0 12px 10px;
     }
 
 
     /* TABELA */
 
     .tabela-container {
-        overflow-x: auto;
+        max-height: 400px;
+        overflow: auto;
     }
 
     table {
-        min-width: 550px;
+        min-width: 570px;
     }
 
 
@@ -623,52 +806,64 @@ input[type="number"] {
     }
 
 
-    /* DOWNLOAD */
+    /* JSON */
 
     .area-json {
-        text-align: center;
+        justify-content: center;
     }
 
 }
 
 
-/* =========================================
+/* ==========================================
    CELULARES MUITO PEQUENOS
-========================================= */
+========================================== */
 
 @media (max-width: 360px) {
 
-    header h1 {
+
+    .cabecalho h1 {
         font-size: 17px;
     }
 
+
     .card-info {
-        gap: 7px;
         padding: 8px;
+        gap: 6px;
     }
 
-    .icone {
-        font-size: 15px;
-    }
 
-    .card-info strong {
+    .info-texto strong {
         font-size: 12px;
     }
 
-    .formulario form {
+
+    #formMunicipio {
         grid-template-columns: 1fr;
     }
 
-    .campo-nome {
+
+    .campo-nome,
+    .campo-id {
         grid-column: auto;
     }
+
 
     .botoes-formulario {
         flex-direction: column;
     }
 
+
     .botoes-formulario button {
         width: 100%;
     }
 
+}
+
+/* Bandeira do Brasil */
+.bandeira-brasil {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Atividade Prática 01: Municípios do Nordeste</title>
+    <title>Atividade 07 - Municípios do Nordeste</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -13,55 +13,97 @@
 <body>
 
     <!-- CABEÇALHO -->
-    <header>
-        <h1>Atividade Prática 01: Municípios do Nordeste</h1>
+    <header class="cabecalho">
+
+        <h1>Atividade 07: Municípios do Nordeste</h1>
+
         <p>Gerenciamento de Municípios (Base em Memória)</p>
+
     </header>
 
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
 
-        <!-- CARTÕES DE INFORMAÇÕES -->
+
+        <!-- INFORMAÇÕES GERAIS -->
         <section class="informacoes">
 
-            <div class="card-info">
-                <span class="icone">🌎</span>
 
-                <div>
+            <!-- REGIÃO -->
+            <div class="card-info">
+
+                <div class="icone icone-regiao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18"></path>
+                        <path d="M12 3a15 15 0 0 1 0 18"></path>
+                        <path d="M12 3a15 15 0 0 0 0 18"></path>
+                    </svg>
+                </div>
+
+                <div class="info-texto">
                     <small>Região:</small>
                     <strong>Nordeste</strong>
                 </div>
+
             </div>
 
-            <div class="card-info">
-                <span class="icone">🇧🇷</span>
+            
+<!-- PAÍS -->
+<div class="card-info">
 
-                <div>
-                    <small>País:</small>
-                    <strong>Brasil</strong>
+    <div class="icone icone-pais">
+        <span class="bandeira-brasil">🇧🇷</span>
+    </div>
+
+    <div class="info-texto">
+        <small>País:</small>
+        <strong>Brasil</strong>
+    </div>
+
+</div>
+
+
+            <!-- TOTAL -->
+            <div class="card-info">
+
+                <div class="icone icone-total">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="9" cy="8" r="3"></circle>
+                        <path d="M3 19v-1a6 6 0 0 1 12 0v1z"></path>
+                        <circle cx="17" cy="9" r="2"></circle>
+                        <path d="M16 14a4 4 0 0 1 5 4v1h-3"></path>
+                    </svg>
                 </div>
-            </div>
 
-            <div class="card-info">
-                <span class="icone">👥</span>
-
-                <div>
+                <div class="info-texto">
                     <small>Total:</small>
-                    <strong id="totalGeral">30</strong>
+                    <strong id="totalGeral">Carregando...</strong>
                 </div>
+
             </div>
 
-            <div class="card-info">
-                <span class="icone">ℹ️</span>
 
-                <div>
-                    <small>Fonte:</small>
-                    <strong>IBGE</strong>
-                </div>
-            </div>
+            <!-- FONTE -->
+<div class="card-info">
+
+    <div class="icone icone-fonte">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 11v5"></path>
+            <path d="M12 7h.01"></path>
+        </svg>
+    </div>
+
+    <div class="info-texto">
+        <small>Fonte:</small>
+        <strong>IBGE (2022)</strong>
+    </div>
+
+</div>
 
         </section>
+
 
 
         <!-- CADASTRO E LISTAGEM -->
@@ -71,13 +113,18 @@
             <!-- FORMULÁRIO -->
             <section class="formulario">
 
+
                 <h2>Cadastrar / Atualizar Município</h2>
+
 
                 <form id="formMunicipio">
 
+
+                    <!-- Guarda o nome original durante edição -->
                     <input type="hidden" id="nomeOriginal">
 
 
+                    <!-- NOME -->
                     <div class="campo campo-nome">
 
                         <label for="nome">Nome do Município</label>
@@ -85,25 +132,29 @@
                         <input
                             type="text"
                             id="nome"
+                            placeholder="Digite o nome do município"
                             required
                         >
 
                     </div>
 
 
-                    <div class="campo">
+                    <!-- ID IBGE -->
+                    <div class="campo campo-id">
 
                         <label for="id_ibge">ID IBGE</label>
 
                         <input
                             type="number"
                             id="id_ibge"
+                            placeholder="Código IBGE"
                             required
                         >
 
                     </div>
 
 
+                    <!-- ESTADO -->
                     <div class="campo">
 
                         <label for="estado">Estado</label>
@@ -111,12 +162,14 @@
                         <input
                             type="text"
                             id="estado"
+                            placeholder="Nome do estado"
                             required
                         >
 
                     </div>
 
 
+                    <!-- UF -->
                     <div class="campo">
 
                         <label for="sigla_uf">UF</label>
@@ -124,6 +177,7 @@
                         <input
                             type="text"
                             id="sigla_uf"
+                            placeholder="Ex: CE"
                             maxlength="2"
                             required
                         >
@@ -131,6 +185,7 @@
                     </div>
 
 
+                    <!-- POPULAÇÃO -->
                     <div class="campo">
 
                         <label for="populacao">População Estimada</label>
@@ -138,17 +193,20 @@
                         <input
                             type="number"
                             id="populacao"
+                            placeholder="População"
+                            min="0"
                             required
                         >
 
                     </div>
 
 
+                    <!-- CAPITAL -->
                     <div class="campo campo-capital">
 
-                        <label for="capital">Capital?</label>
+                        <label>Capital?</label>
 
-                        <div class="checkbox-container">
+                        <label class="checkbox-container">
 
                             <input
                                 type="checkbox"
@@ -157,7 +215,7 @@
 
                             <span>Sim</span>
 
-                        </div>
+                        </label>
 
                     </div>
 
@@ -168,6 +226,7 @@
                         <button
                             type="submit"
                             id="botaoSalvar"
+                            class="botao-salvar"
                         >
                             Salvar / Atualizar
                         </button>
@@ -175,18 +234,22 @@
 
                         <button
                             type="button"
+                            id="botaoBuscarNome"
                             class="botao-buscar"
                             onclick="buscarPorNome()"
                         >
                             Buscar por Nome
                         </button>
 
+
                     </div>
 
                 </form>
 
 
-                <p id="mensagem"></p>
+                <!-- MENSAGEM -->
+                <div id="mensagem" role="status"></div>
+
 
             </section>
 
@@ -196,7 +259,7 @@
             <section class="listagem">
 
 
-                <!-- TÍTULO -->
+                <!-- CABEÇALHO DA LISTAGEM -->
                 <div class="titulo-listagem">
 
                     <h2>Lista de Municípios</h2>
@@ -217,6 +280,7 @@
                 <div class="filtros">
 
 
+                    <!-- BUSCA -->
                     <div class="campo-busca">
 
                         <label for="filtroBusca">Busca</label>
@@ -230,6 +294,7 @@
                     </div>
 
 
+                    <!-- UF -->
                     <div class="campo-filtro">
 
                         <label for="filtroUF">Filtrar por UF</label>
@@ -248,7 +313,11 @@
 
 
                 <!-- TOTAL ENCONTRADO -->
-                <p id="total"></p>
+                <div class="resumo-listagem">
+
+                    <p id="total">Carregando municípios...</p>
+
+                </div>
 
 
 
@@ -273,6 +342,12 @@
 
                         <tbody id="corpoTabela">
 
+                            <tr>
+                                <td colspan="6" class="estado-tabela">
+                                    Carregando municípios...
+                                </td>
+                            </tr>
+
                         </tbody>
 
                     </table>
@@ -288,14 +363,27 @@
                         href="{{ url_for('baixar_municipios_json') }}"
                         class="botao-json"
                     >
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                            <path d="M12 3v12"></path>
+                            <path d="m7 10 5 5 5-5"></path>
+                            <path d="M4 17v4h16v-4"></path>
+
+                        </svg>
+
                         Baixar JSON
+
                     </a>
 
                 </div>
 
+
             </section>
 
+
         </div>
+
 
     </main>
 
@@ -321,238 +409,104 @@
         const mensagem =
             document.getElementById('mensagem');
 
+        const tabela =
+            document.getElementById('corpoTabela');
 
 
-        // LISTAR E FILTRAR MUNICÍPIOS
+        // Armazena os municípios carregados
+        let municipiosCarregados = {};
+
+
+
+        // =========================================
+        // NORMALIZAR TEXTO
+        // =========================================
+
+        function normalizarTexto(texto) {
+
+            return texto
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .trim();
+
+        }
+
+
+
+        // =========================================
+        // CARREGAR MUNICÍPIOS
+        // =========================================
+
         async function listarMunicipios() {
-
-
-            // Pesquisa digitada
-            const busca =
-                document.getElementById('filtroBusca')
-                    .value.trim();
-
-
-            // UF digitada
-            const uf =
-                document.getElementById('filtroUF')
-                    .value.trim().toUpperCase();
-
 
 
             try {
 
 
-                // Busca todos os municípios
-                const respostaTodos =
-                    await fetch('/municipios');
-
-                const todosMunicipios =
-                    await respostaTodos.json();
+                // Faz apenas UMA requisição
+                const resposta = await fetch('/municipios');
 
 
+                // Verifica se a resposta foi bem-sucedida
+                if (!resposta.ok) {
 
-                // Atualiza o total geral
-                document.getElementById('totalGeral').textContent =
-                    Object.keys(todosMunicipios).length;
-
-
-
-                // Define o endereço da pesquisa
-                let endereco = '/municipios';
-
-
-                if (busca) {
-
-                    endereco +=
-                        '?busca=' + encodeURIComponent(busca);
+                    throw new Error(
+                        'Erro HTTP: ' + resposta.status
+                    );
 
                 }
 
 
-
-                // Busca os municípios de acordo com o nome
-                const resposta =
-                    busca
-                    ? await fetch(endereco)
-                    : respostaTodos;
-
-
-                const municipios =
+                // Lê o JSON apenas uma vez
+                municipiosCarregados =
                     await resposta.json();
 
 
+                // Atualiza o total geral dinamicamente
+                const totalCadastrados =
+                    Object.keys(municipiosCarregados).length;
 
-                // Tabela
-                const tabela =
-                    document.getElementById('corpoTabela');
+                document.getElementById('totalGeral')
+                    .textContent = totalCadastrados;
 
-                tabela.innerHTML = '';
 
 
-
-                // Nomes dos municípios
-                let nomes =
-                    Object.keys(municipios);
-
-
-
-                // FILTRAR POR UF
-                if (uf) {
-
-                    nomes = nomes.filter(nome => {
-
-                        return municipios[nome]
-                            .sigla_uf
-                            .toUpperCase() === uf;
-
-                    });
-
-                }
-
-
-
-                // TOTAL ENCONTRADO
-                document.getElementById('total').textContent =
-                    'Municípios encontrados: ' + nomes.length;
-
-
-
-                // PERCORRER MUNICÍPIOS
-                for (const nome of nomes) {
-
-
-                    const dados = municipios[nome];
-
-                    const linha = document.createElement('tr');
-
-
-
-                    // NOME
-                    const colunaNome =
-                        document.createElement('td');
-
-                    colunaNome.textContent = nome;
-
-
-
-                    // UF
-                    const colunaUF =
-                        document.createElement('td');
-
-                    colunaUF.textContent =
-                        dados.sigla_uf;
-
-
-
-                    // CAPITAL
-                    const colunaCapital =
-                        document.createElement('td');
-
-                    colunaCapital.textContent =
-                        dados.capital ? 'Sim' : 'Não';
-
-
-
-                    // POPULAÇÃO
-                    const colunaPopulacao =
-                        document.createElement('td');
-
-                    colunaPopulacao.textContent =
-                        dados.populacao_estimada
-                            .toLocaleString('pt-BR');
-
-
-
-                    // ID IBGE
-                    const colunaID =
-                        document.createElement('td');
-
-                    colunaID.textContent =
-                        dados.id_ibge;
-
-
-
-                    // AÇÕES
-                    const colunaAcoes =
-                        document.createElement('td');
-
-                    colunaAcoes.className = 'acoes';
-
-
-
-                    // BOTÃO EDITAR
-                    const botaoEditar =
-                        document.createElement('button');
-
-                    botaoEditar.textContent = '✏';
-
-                    botaoEditar.className = 'editar';
-
-                    botaoEditar.title =
-                        'Editar município';
-
-                    botaoEditar.onclick = function() {
-
-                        editarMunicipio(nome, dados);
-
-                    };
-
-
-
-                    // BOTÃO EXCLUIR
-                    const botaoExcluir =
-                        document.createElement('button');
-
-                    botaoExcluir.textContent = '🗑';
-
-                    botaoExcluir.className = 'excluir';
-
-                    botaoExcluir.title =
-                        'Excluir município';
-
-                    botaoExcluir.onclick = function() {
-
-                        excluirMunicipio(nome);
-
-                    };
-
-
-
-                    // ADICIONAR BOTÕES
-                    colunaAcoes.appendChild(botaoEditar);
-
-                    colunaAcoes.appendChild(botaoExcluir);
-
-
-
-                    // ADICIONAR ELEMENTOS À LINHA
-                    linha.appendChild(colunaNome);
-
-                    linha.appendChild(colunaUF);
-
-                    linha.appendChild(colunaCapital);
-
-                    linha.appendChild(colunaPopulacao);
-
-                    linha.appendChild(colunaID);
-
-                    linha.appendChild(colunaAcoes);
-
-
-
-                    // ADICIONAR LINHA À TABELA
-                    tabela.appendChild(linha);
-
-                }
+                // Exibe os municípios
+                atualizarTabela();
 
 
             } catch (erro) {
 
-                mensagem.textContent =
-                    'Erro ao carregar municípios.';
 
-                console.error(erro);
+                // Só aparece se houver um erro de verdade
+                document.getElementById('totalGeral')
+                    .textContent = '—';
+
+
+                document.getElementById('total')
+                    .textContent =
+                    'Não foi possível carregar os municípios.';
+
+
+                tabela.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="estado-tabela">
+                            Erro ao carregar os dados.
+                            Verifique se o servidor Flask está funcionando.
+                        </td>
+                    </tr>
+                `;
+
+
+                mensagem.textContent =
+                    'Falha na conexão com o servidor.';
+
+
+                console.error(
+                    'Erro ao carregar municípios:',
+                    erro
+                );
 
             }
 
@@ -560,7 +514,280 @@
 
 
 
-        // CADASTRAR OU ATUALIZAR MUNICÍPIO
+        // =========================================
+        // ATUALIZAR TABELA E APLICAR FILTROS
+        // =========================================
+
+        function atualizarTabela() {
+
+
+            // Pesquisa
+            const busca =
+                normalizarTexto(
+                    document.getElementById('filtroBusca')
+                        .value
+                );
+
+
+            // UF
+            const uf =
+                document.getElementById('filtroUF')
+                    .value.trim().toUpperCase();
+
+
+
+            // Limpa a tabela
+            tabela.innerHTML = '';
+
+
+
+            // Pega os municípios carregados
+            const nomes =
+                Object.keys(municipiosCarregados);
+
+
+
+            // Filtra os municípios
+            const filtrados = nomes.filter(nome => {
+
+
+                const dados =
+                    municipiosCarregados[nome];
+
+
+                // Pesquisa por nome, estado ou UF
+                const correspondeBusca =
+
+                    !busca ||
+
+                    normalizarTexto(nome).includes(busca) ||
+
+                    normalizarTexto(dados.estado).includes(busca) ||
+
+                    normalizarTexto(dados.sigla_uf).includes(busca);
+
+
+
+                // Filtro pela UF
+                const correspondeUF =
+
+                    !uf ||
+
+                    dados.sigla_uf.toUpperCase() === uf;
+
+
+
+                return correspondeBusca && correspondeUF;
+
+            });
+
+
+
+            // TOTAL GERAL DINÂMICO
+            const totalCadastrados =
+                Object.keys(municipiosCarregados).length;
+
+
+            // Atualiza a mensagem conforme os filtros
+            document.getElementById('total').textContent =
+
+                filtrados.length === totalCadastrados
+
+                ? 'Exibindo todos os municípios'
+
+                : 'Municípios encontrados: ' + filtrados.length;
+
+
+
+            // Caso nenhum município seja encontrado
+            if (filtrados.length === 0) {
+
+
+                tabela.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="estado-tabela">
+                            Nenhum município encontrado.
+                        </td>
+                    </tr>
+                `;
+
+
+                return;
+
+            }
+
+
+
+            // Percorre os municípios encontrados
+            for (const nome of filtrados) {
+
+
+                const dados =
+                    municipiosCarregados[nome];
+
+
+                const linha =
+                    document.createElement('tr');
+
+
+
+                // NOME
+                const colunaNome =
+                    document.createElement('td');
+
+                colunaNome.textContent = nome;
+
+
+
+                // UF
+                const colunaUF =
+                    document.createElement('td');
+
+                colunaUF.textContent =
+                    dados.sigla_uf;
+
+
+
+                // CAPITAL
+                const colunaCapital =
+                    document.createElement('td');
+
+                colunaCapital.textContent =
+                    dados.capital ? 'Sim' : 'Não';
+
+
+
+                // POPULAÇÃO
+                const colunaPopulacao =
+                    document.createElement('td');
+
+                colunaPopulacao.textContent =
+
+                    Number(dados.populacao_estimada)
+                        .toLocaleString('pt-BR');
+
+
+
+                // ID IBGE
+                const colunaID =
+                    document.createElement('td');
+
+                colunaID.textContent =
+                    dados.id_ibge;
+
+
+
+                // AÇÕES
+                const colunaAcoes =
+                    document.createElement('td');
+
+                colunaAcoes.className = 'acoes';
+
+
+
+                // BOTÃO EDITAR
+                const botaoEditar =
+                    document.createElement('button');
+
+                botaoEditar.className = 'editar';
+
+                botaoEditar.title =
+                    'Editar município';
+
+                botaoEditar.setAttribute(
+                    'aria-label',
+                    'Editar ' + nome
+                );
+
+
+                // Ícone editar
+                botaoEditar.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 16.5V20h3.5L18 9.5 14.5 6 4 16.5z"></path>
+                        <path d="m13.5 7 3.5 3.5"></path>
+                        <path d="M20 20H10"></path>
+                    </svg>
+                `;
+
+
+                botaoEditar.onclick = function() {
+
+                    editarMunicipio(nome, dados);
+
+                };
+
+
+
+                // BOTÃO EXCLUIR
+                const botaoExcluir =
+                    document.createElement('button');
+
+                botaoExcluir.className = 'excluir';
+
+                botaoExcluir.title =
+                    'Excluir município';
+
+                botaoExcluir.setAttribute(
+                    'aria-label',
+                    'Excluir ' + nome
+                );
+
+
+                // Ícone excluir
+                botaoExcluir.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M5 7l1 14h12l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                    </svg>
+                `;
+
+
+                botaoExcluir.onclick = function() {
+
+                    excluirMunicipio(nome);
+
+                };
+
+
+
+                // Adiciona botões
+                colunaAcoes.appendChild(botaoEditar);
+
+                colunaAcoes.appendChild(botaoExcluir);
+
+
+
+                // Monta a linha
+                linha.appendChild(colunaNome);
+
+                linha.appendChild(colunaUF);
+
+                linha.appendChild(colunaCapital);
+
+                linha.appendChild(colunaPopulacao);
+
+                linha.appendChild(colunaID);
+
+                linha.appendChild(colunaAcoes);
+
+
+
+                // Adiciona à tabela
+                tabela.appendChild(linha);
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // CADASTRAR / ATUALIZAR
+        // =========================================
+
         formulario.addEventListener(
             'submit',
             async function(event) {
@@ -570,7 +797,6 @@
 
 
 
-                // Verifica se está editando
                 const nomeOriginal =
                     document.getElementById('nomeOriginal')
                         .value;
@@ -580,9 +806,11 @@
                 // Dados do formulário
                 const dados = {
 
+
                     nome:
                         document.getElementById('nome')
                             .value.trim(),
+
 
                     id_ibge:
                         Number(
@@ -590,17 +818,21 @@
                                 .value
                         ),
 
+
                     estado:
                         document.getElementById('estado')
                             .value.trim(),
+
 
                     sigla_uf:
                         document.getElementById('sigla_uf')
                             .value.trim().toUpperCase(),
 
+
                     capital:
                         document.getElementById('capital')
                             .checked,
+
 
                     populacao_estimada:
                         Number(
@@ -612,7 +844,7 @@
 
 
 
-                // Definição da rota e método
+                // Rota e método
                 let endereco = '/municipios';
 
                 let metodo = 'POST';
@@ -631,7 +863,7 @@
                     metodo = 'PATCH';
 
 
-                    // O nome não será alterado
+                    // O nome não é alterado no PATCH
                     delete dados.nome;
 
                 }
@@ -641,7 +873,6 @@
                 try {
 
 
-                    // Enviar dados ao Flask
                     const resposta = await fetch(
                         endereco,
                         {
@@ -658,43 +889,50 @@
                     );
 
 
-
                     const resultado =
                         await resposta.json();
 
 
 
-                    // Mensagem
                     mensagem.textContent =
                         resultado.mensagem || resultado.erro;
 
 
 
-                    // Se deu certo
                     if (resposta.ok) {
 
 
+                        // Limpa o formulário
                         formulario.reset();
+
+
+                        // Libera o nome
+                        document.getElementById('nome')
+                            .disabled = false;
 
 
                         document.getElementById('nomeOriginal')
                             .value = '';
 
 
+                        // Restaura o botão
                         document.getElementById('botaoSalvar')
                             .textContent =
                             'Salvar / Atualizar';
 
 
-                        listarMunicipios();
+                        // Atualiza os dados
+                        await listarMunicipios();
 
                     }
 
 
                 } catch (erro) {
 
+
                     mensagem.textContent =
                         'Erro ao salvar município.';
+
 
                     console.error(erro);
 
@@ -706,7 +944,10 @@
 
 
 
-        // BUSCAR MUNICÍPIO PELO NOME
+        // =========================================
+        // BUSCAR POR NOME
+        // =========================================
+
         async function buscarPorNome() {
 
 
@@ -718,8 +959,10 @@
 
             if (!nome) {
 
+
                 mensagem.textContent =
                     'Digite o nome do município para buscar.';
+
 
                 return;
 
@@ -743,8 +986,10 @@
 
                 if (!resposta.ok) {
 
+
                     mensagem.textContent =
                         dados.erro;
+
 
                     return;
 
@@ -752,18 +997,18 @@
 
 
 
-                // Preencher formulário
                 preencherFormulario(nome, dados);
 
 
                 mensagem.textContent =
                     'Município encontrado.';
 
-
             } catch (erro) {
+
 
                 mensagem.textContent =
                     'Erro ao buscar município.';
+
 
                 console.error(erro);
 
@@ -774,41 +1019,51 @@
 
 
 
+        // =========================================
         // PREENCHER FORMULÁRIO
+        // =========================================
+
         function preencherFormulario(nome, dados) {
 
 
-            document.getElementById('nome').value =
-                nome;
+            document.getElementById('nome')
+                .value = nome;
 
 
-            document.getElementById('id_ibge').value =
-                dados.id_ibge;
+            document.getElementById('id_ibge')
+                .value = dados.id_ibge;
 
 
-            document.getElementById('estado').value =
-                dados.estado;
+            document.getElementById('estado')
+                .value = dados.estado;
 
 
-            document.getElementById('sigla_uf').value =
-                dados.sigla_uf;
+            document.getElementById('sigla_uf')
+                .value = dados.sigla_uf;
 
 
-            document.getElementById('populacao').value =
-                dados.populacao_estimada;
+            document.getElementById('populacao')
+                .value = dados.populacao_estimada;
 
 
-            document.getElementById('capital').checked =
-                dados.capital;
-
-
-
-            document.getElementById('nomeOriginal').value =
-                nome;
+            document.getElementById('capital')
+                .checked = dados.capital;
 
 
 
-            document.getElementById('botaoSalvar').textContent =
+            document.getElementById('nomeOriginal')
+                .value = nome;
+
+
+
+            // Nome não pode ser alterado no PATCH
+            document.getElementById('nome')
+                .disabled = true;
+
+
+
+            document.getElementById('botaoSalvar')
+                .textContent =
                 'Atualizar Município';
 
         }
@@ -816,7 +1071,10 @@
 
 
 
-        // EDITAR MUNICÍPIO
+        // =========================================
+        // EDITAR
+        // =========================================
+
         function editarMunicipio(nome, dados) {
 
 
@@ -826,12 +1084,16 @@
             mensagem.textContent =
                 'Editando: ' + nome;
 
+
         }
 
 
 
 
-        // EXCLUIR MUNICÍPIO
+        // =========================================
+        // EXCLUIR
+        // =========================================
+
         async function excluirMunicipio(nome) {
 
 
@@ -872,15 +1134,19 @@
 
                 if (resposta.ok) {
 
-                    listarMunicipios();
+
+                    // Atualiza a tabela e o total
+                    await listarMunicipios();
 
                 }
 
 
             } catch (erro) {
 
+
                 mensagem.textContent =
                     'Erro ao excluir município.';
+
 
                 console.error(erro);
 
@@ -891,7 +1157,10 @@
 
 
 
+        // =========================================
         // NOVO CADASTRO
+        // =========================================
+
         function novoMunicipio() {
 
 
@@ -902,6 +1171,11 @@
                 .value = '';
 
 
+            // Reativa o campo nome
+            document.getElementById('nome')
+                .disabled = false;
+
+
             document.getElementById('botaoSalvar')
                 .textContent =
                 'Salvar / Atualizar';
@@ -909,32 +1183,46 @@
 
             mensagem.textContent = '';
 
+
+            // Posiciona no formulário
+            document.getElementById('nome')
+                .focus();
+
         }
 
 
 
 
+        // =========================================
         // PESQUISA AUTOMÁTICA
+        // =========================================
+
         document.getElementById('filtroBusca')
             .addEventListener(
                 'input',
-                listarMunicipios
+                atualizarTabela
             );
 
 
 
 
+        // =========================================
         // FILTRO AUTOMÁTICO POR UF
+        // =========================================
+
         document.getElementById('filtroUF')
             .addEventListener(
                 'input',
-                listarMunicipios
+                atualizarTabela
             );
 
 
 
 
-        // CARREGAR MUNICÍPIOS AO ABRIR A PÁGINA
+        // =========================================
+        // CARREGAR AO ABRIR
+        // =========================================
+
         listarMunicipios();
 
 
