@@ -1,4 +1,7 @@
-/* Configurações gerais */
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,195 +9,491 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f6f4;
-    color: #26352c;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f3f5;
+    color: #333;
+    font-size: 13px;
 }
 
-/* Cabeçalho */
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
 header {
-    background-color: #176b45;
+    background-color: #29466f;
     color: white;
     text-align: center;
-    padding: 30px 15px;
+    padding: 25px 15px;
 }
 
 header h1 {
-    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 7px;
 }
 
-/* Área principal */
+header p {
+    font-size: 14px;
+    color: #e0e7f0;
+}
+
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+========================================= */
+
 main {
-    width: 90%;
-    max-width: 1100px;
-    margin: 30px auto;
+    width: 94%;
+    max-width: 1250px;
+    margin: 22px auto;
 }
 
-/* Seções */
-section {
-    background-color: white;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
 
-h2 {
-    color: #176b45;
+/* =========================================
+   CARTÕES DE INFORMAÇÕES
+========================================= */
+
+.informacoes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
     margin-bottom: 20px;
 }
 
-/* Formulário */
-form {
+.card-info {
+    background-color: white;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-height: 68px;
+}
+
+.icone {
+    font-size: 18px;
+}
+
+.card-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-info small {
+    color: #777;
+    font-size: 11px;
+}
+
+.card-info strong {
+    color: #333;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   CADASTRO E LISTAGEM
+========================================= */
+
+.conteudo {
+    display: grid;
+
+    /* Duas colunas no computador */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    gap: 20px;
+    align-items: start;
+}
+
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+section {
+    background-color: white;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+section h2 {
+    background-color: #f5f5f5;
+    color: #333;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 12px 14px;
+
+    border-bottom: 1px solid #dedede;
+    margin: 0;
+}
+
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.formulario form {
+    padding: 14px;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
+
     gap: 12px;
 }
 
-label {
-    font-weight: bold;
+
+/* CAMPOS */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-input, select {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.campo label {
+    font-size: 11px;
+    color: #444;
 }
 
-form button {
+
+/* CAMPO NOME OCUPA A LINHA TODA */
+
+.campo-nome {
     grid-column: 1 / -1;
 }
 
-/* Botões */
+
+/* INPUTS */
+
+input,
+select {
+    width: 100%;
+    height: 32px;
+
+    padding: 6px 8px;
+
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+
+    background-color: white;
+    color: #333;
+
+    font-size: 12px;
+
+    outline: none;
+}
+
+
+/* EFEITO AO CLICAR NO CAMPO */
+
+input:focus,
+select:focus {
+    border-color: #7ca3d4;
+
+    box-shadow:
+        0 0 3px rgba(41, 70, 111, 0.2);
+}
+
+
+/* =========================================
+   CAMPO CAPITAL
+========================================= */
+
+.campo-capital {
+    justify-content: center;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+}
+
+.checkbox-container input {
+    width: auto;
+    height: auto;
+    accent-color: #3978bd;
+}
+
+.checkbox-container span {
+    font-size: 12px;
+}
+
+
+/* =========================================
+   BOTÕES DO FORMULÁRIO
+========================================= */
+
+.botoes-formulario {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+    margin-top: 3px;
+}
+
+
+/* BOTÕES GERAIS */
+
 button {
-    padding: 11px 16px;
     border: none;
-    border-radius: 5px;
-    background-color: #176b45;
+    border-radius: 4px;
+
+    padding: 9px 12px;
+
+    font-size: 11px;
     color: white;
+
     cursor: pointer;
-    margin: 3px;
+
+    transition: background-color 0.2s;
 }
 
 button:hover {
-    opacity: 0.85;
+    filter: brightness(0.92);
 }
 
-.editar {
-    background-color: #d49a20;
+
+/* SALVAR */
+
+#botaoSalvar {
+    background-color: #39934f;
 }
 
-.excluir {
-    background-color: #c0392b;
+
+/* BUSCAR POR NOME */
+
+.botao-buscar {
+    background-color: #2878c7;
 }
 
-/* Filtros */
-.filtros {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
+
+/* CADASTRAR NOVO */
+
+.botao-novo {
+    background-color: #39934f;
+    white-space: nowrap;
 }
 
-.filtros input {
-    flex: 1;
-    min-width: 250px;
-    max-width: none;
-}
 
-/* Link para baixar o JSON */
-.botao-json {
-    display: inline-block;
-    padding: 11px 16px;
-    margin: 3px;
-    border-radius: 5px;
-    background-color: #176b45;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: 14px;
+/* =========================================
+   MENSAGEM
+========================================= */
+
+#mensagem {
+    padding: 0 14px 14px;
+
+    color: #39794b;
+    font-size: 12px;
     font-weight: bold;
 }
 
-.botao-json:hover {
-    background-color: #125638;
+
+/* =========================================
+   LISTAGEM
+========================================= */
+
+.listagem {
+    min-width: 0;
 }
 
-/* Tabela */
+
+/* TÍTULO E BOTÃO CADASTRAR */
+
+.titulo-listagem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dedede;
+}
+
+.titulo-listagem h2 {
+    border: none;
+    flex: 1;
+}
+
+
+/* =========================================
+   PESQUISA E FILTROS
+========================================= */
+
+.filtros {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+    padding: 14px;
+}
+
+.campo-busca,
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-busca label,
+.campo-filtro label {
+    font-size: 11px;
+    color: #444;
+}
+
+
+/* =========================================
+   TOTAL ENCONTRADO
+========================================= */
+
+#total {
+    font-size: 11px;
+    color: #666;
+
+    padding: 0 14px 10px;
+}
+
+
+/* =========================================
+   TABELA
+========================================= */
+
 .tabela-container {
+    width: 100%;
     overflow-x: auto;
+
+    padding: 0 10px 10px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+
+    font-size: 11px;
+    white-space: nowrap;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+th,
+td {
+    padding: 10px 8px;
     text-align: left;
+
+    border-bottom: 1px solid #e6e6e6;
 }
 
 th {
-    background-color: #176b45;
+    background-color: #f5f5f5;
+    color: #333;
+
+    font-weight: 600;
+
+    border-top: 1px solid #dedede;
+}
+
+
+/* EFEITO NAS LINHAS */
+
+tbody tr:hover {
+    background-color: #f8f9fb;
+}
+
+
+/* =========================================
+   BOTÕES DE AÇÃO
+========================================= */
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.acoes button {
+    width: 27px;
+    height: 27px;
+
+    padding: 0;
+
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+
+/* EDITAR */
+
+.editar {
+    background-color: #2878c7;
+}
+
+
+/* EXCLUIR */
+
+.excluir {
+    background-color: #d84343;
+}
+
+
+/* =========================================
+   DOWNLOAD JSON
+========================================= */
+
+.area-json {
+    padding: 0 14px 14px;
+    text-align: right;
+}
+
+.botao-json {
+    display: inline-block;
+
+    padding: 8px 11px;
+
+    background-color: #29466f;
     color: white;
+
+    text-decoration: none;
+    border-radius: 4px;
+
+    font-size: 11px;
 }
 
-tr:nth-child(even) {
-    background-color: #f1f7f3;
+.botao-json:hover {
+    background-color: #1e3658;
 }
 
-/* Mensagens */
-#mensagem {
-    margin-top: 15px;
-    font-weight: bold;
-}
 
-#total {
-    margin-top: 10px;
-    font-weight: bold;
-}
+/* =========================================
+   RODAPÉ
+========================================= */
 
-/* Rodapé */
 footer {
     text-align: center;
-    padding: 20px;
-    color: #666;
+    padding: 18px;
+
+    color: #777;
+    font-size: 11px;
 }
 
-/* Adaptação para celulares */
-@media (max-width: 600px) {
 
-    main {
-        width: 95%;
-    }
+/* =========================================
+   REMOVER SETINHAS DOS CAMPOS NUMÉRICOS
+========================================= */
 
-    form {
-        grid-template-columns: 1fr;
-    }
-
-    .filtros {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filtros input {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .filtros button,
-    .botao-json {
-        width: 100%;
-        margin: 3px 0;
-    }
-}
-
-/* Remover as setinhas dos campos numéricos */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -204,4 +503,172 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
+}
+
+
+/* =========================================
+   TABLETS E TELAS MENORES
+========================================= */
+
+@media (max-width: 900px) {
+
+    main {
+        width: 95%;
+    }
+
+    .conteudo {
+        grid-template-columns: 1fr;
+    }
+
+    .informacoes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================
+   CELULARES
+========================================= */
+
+@media (max-width: 550px) {
+
+    main {
+        width: 95%;
+        margin: 12px auto;
+    }
+
+
+    /* CABEÇALHO */
+
+    header {
+        padding: 20px 12px;
+    }
+
+    header h1 {
+        font-size: 19px;
+        line-height: 1.4;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+
+    /* CARTÕES */
+
+    .informacoes {
+        gap: 8px;
+    }
+
+    .card-info {
+        padding: 10px;
+        min-height: 58px;
+    }
+
+
+    /* SEÇÕES */
+
+    .conteudo {
+        gap: 14px;
+    }
+
+
+    /* FORMULÁRIO */
+
+    .formulario form {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+
+    /* PESQUISA */
+
+    .filtros {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+
+    /* TÍTULO DA LISTAGEM */
+
+    .titulo-listagem {
+        flex-wrap: wrap;
+    }
+
+    .titulo-listagem h2 {
+        min-width: 100%;
+    }
+
+    .titulo-listagem .botao-novo {
+        margin: 0 14px 10px;
+    }
+
+
+    /* TABELA */
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 550px;
+    }
+
+
+    /* BOTÕES */
+
+    .botoes-formulario button {
+        flex: 1;
+    }
+
+
+    /* DOWNLOAD */
+
+    .area-json {
+        text-align: center;
+    }
+
+}
+
+
+/* =========================================
+   CELULARES MUITO PEQUENOS
+========================================= */
+
+@media (max-width: 360px) {
+
+    header h1 {
+        font-size: 17px;
+    }
+
+    .card-info {
+        gap: 7px;
+        padding: 8px;
+    }
+
+    .icone {
+        font-size: 15px;
+    }
+
+    .card-info strong {
+        font-size: 12px;
+    }
+
+    .formulario form {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-nome {
+        grid-column: auto;
+    }
+
+    .botoes-formulario {
+        flex-direction: column;
+    }
+
+    .botoes-formulario button {
+        width: 100%;
+    }
+
 }

@@ -5,312 +5,938 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Municípios do Nordeste</title>
+    <title>Atividade Prática 01: Municípios do Nordeste</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
+    <!-- CABEÇALHO -->
     <header>
-        <h1>Municípios do Nordeste</h1>
-        <p>Cadastro e gerenciamento de municípios brasileiros</p>
+        <h1>Atividade Prática 01: Municípios do Nordeste</h1>
+        <p>Gerenciamento de Municípios (Base em Memória)</p>
     </header>
 
+
+    <!-- CONTEÚDO PRINCIPAL -->
     <main>
 
-        <section class="formulario">
+        <!-- CARTÕES DE INFORMAÇÕES -->
+        <section class="informacoes">
 
-            <h2>Cadastrar Município</h2>
+            <div class="card-info">
+                <span class="icone">🌎</span>
 
-            <form id="formMunicipio">
-
-                <label for="nome">Nome do município:</label>
-                <input type="text" id="nome" required>
-
-                <label for="id_ibge">ID IBGE:</label>
-                <input type="number" id="id_ibge" required>
-
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" required>
-
-                <label for="sigla_uf">Sigla do estado:</label>
-                <input type="text" id="sigla_uf" maxlength="2" required>
-
-                <label for="capital">É capital?</label>
-                <select id="capital" required>
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
-                </select>
-
-                <label for="populacao">População estimada:</label>
-                <input type="number" id="populacao" required>
-
-                <button type="submit" id="botaoSalvar">
-                    Cadastrar município
-                </button>
-
-            </form>
-
-            <p id="mensagem"></p>
-
-        </section>
-
-
-        <section class="listagem">
-
-            <h2>Municípios cadastrados</h2>
-
-            <div class="filtros">
-
-                <input
-                    type="text"
-                    id="filtroUF"
-                    placeholder="Pesquisar município, estado ou UF..."
-                >
-
-                <button type="button" onclick="listarMunicipios()">
-                    Filtrar
-                </button>
-
-                <button type="button" onclick="limparFiltro()">
-                    Mostrar todos
-                </button>
-
-                <a
-                    href="{{ url_for('baixar_municipios_json') }}"
-                    class="botao-json"
-                >
-                    Baixar arquivo JSON
-                </a>
-
+                <div>
+                    <small>Região:</small>
+                    <strong>Nordeste</strong>
+                </div>
             </div>
 
-            <p id="total"></p>
+            <div class="card-info">
+                <span class="icone">🇧🇷</span>
 
-            <div class="tabela-container">
+                <div>
+                    <small>País:</small>
+                    <strong>Brasil</strong>
+                </div>
+            </div>
 
-                <table>
+            <div class="card-info">
+                <span class="icone">👥</span>
 
-                    <thead>
-                        <tr>
-                            <th>Município</th>
-                            <th>Estado</th>
-                            <th>UF</th>
-                            <th>Capital</th>
-                            <th>População</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
+                <div>
+                    <small>Total:</small>
+                    <strong id="totalGeral">30</strong>
+                </div>
+            </div>
 
-                    <tbody id="corpoTabela">
-                    </tbody>
+            <div class="card-info">
+                <span class="icone">ℹ️</span>
 
-                </table>
-
+                <div>
+                    <small>Fonte:</small>
+                    <strong>IBGE</strong>
+                </div>
             </div>
 
         </section>
+
+
+        <!-- CADASTRO E LISTAGEM -->
+        <div class="conteudo">
+
+
+            <!-- FORMULÁRIO -->
+            <section class="formulario">
+
+                <h2>Cadastrar / Atualizar Município</h2>
+
+                <form id="formMunicipio">
+
+                    <input type="hidden" id="nomeOriginal">
+
+
+                    <div class="campo campo-nome">
+
+                        <label for="nome">Nome do Município</label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="id_ibge">ID IBGE</label>
+
+                        <input
+                            type="number"
+                            id="id_ibge"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="estado">Estado</label>
+
+                        <input
+                            type="text"
+                            id="estado"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="sigla_uf">UF</label>
+
+                        <input
+                            type="text"
+                            id="sigla_uf"
+                            maxlength="2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="populacao">População Estimada</label>
+
+                        <input
+                            type="number"
+                            id="populacao"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo campo-capital">
+
+                        <label for="capital">Capital?</label>
+
+                        <div class="checkbox-container">
+
+                            <input
+                                type="checkbox"
+                                id="capital"
+                            >
+
+                            <span>Sim</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+                    <div class="botoes-formulario">
+
+                        <button
+                            type="submit"
+                            id="botaoSalvar"
+                        >
+                            Salvar / Atualizar
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="botao-buscar"
+                            onclick="buscarPorNome()"
+                        >
+                            Buscar por Nome
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <p id="mensagem"></p>
+
+            </section>
+
+
+
+            <!-- LISTAGEM -->
+            <section class="listagem">
+
+
+                <!-- TÍTULO -->
+                <div class="titulo-listagem">
+
+                    <h2>Lista de Municípios</h2>
+
+                    <button
+                        type="button"
+                        class="botao-novo"
+                        onclick="novoMunicipio()"
+                    >
+                        + Cadastrar Novo
+                    </button>
+
+                </div>
+
+
+
+                <!-- PESQUISA E FILTRO -->
+                <div class="filtros">
+
+
+                    <div class="campo-busca">
+
+                        <label for="filtroBusca">Busca</label>
+
+                        <input
+                            type="text"
+                            id="filtroBusca"
+                            placeholder="Buscar município..."
+                        >
+
+                    </div>
+
+
+                    <div class="campo-filtro">
+
+                        <label for="filtroUF">Filtrar por UF</label>
+
+                        <input
+                            type="text"
+                            id="filtroUF"
+                            placeholder="Ex: CE"
+                            maxlength="2"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TOTAL ENCONTRADO -->
+                <p id="total"></p>
+
+
+
+                <!-- TABELA -->
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Nome</th>
+                                <th>UF</th>
+                                <th>Capital</th>
+                                <th>População</th>
+                                <th>ID IBGE</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="corpoTabela">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- DOWNLOAD JSON -->
+                <div class="area-json">
+
+                    <a
+                        href="{{ url_for('baixar_municipios_json') }}"
+                        class="botao-json"
+                    >
+                        Baixar JSON
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
 
     </main>
 
+
+
+    <!-- RODAPÉ -->
     <footer>
-        <p>Projeto AT07 - Manipulação de Municípios do Nordeste</p>
+
+        <p>Desenvolvido em Flask | Manipulação de Dicionários</p>
+
     </footer>
 
 
+
+    <!-- JAVASCRIPT -->
     <script>
 
-        // Elementos da página
-        const formulario = document.getElementById('formMunicipio');
-        const mensagem = document.getElementById('mensagem');
+
+        // ELEMENTOS DA PÁGINA
+        const formulario =
+            document.getElementById('formMunicipio');
+
+        const mensagem =
+            document.getElementById('mensagem');
 
 
-        // Função para listar e filtrar os municípios
+
+        // LISTAR E FILTRAR MUNICÍPIOS
         async function listarMunicipios() {
 
-            // Pegando o texto digitado na pesquisa
-            const busca = document.getElementById('filtroUF').value.trim();
 
-            // Endereço da rota
-            let endereco = '/municipios';
-
-            // Enviando a pesquisa para o Flask
-            if (busca) {
-                endereco += '?busca=' + encodeURIComponent(busca);
-            }
-
-            // Buscando os municípios
-            const resposta = await fetch(endereco);
-            const municipios = await resposta.json();
-
-            // Pegando a tabela
-            const tabela = document.getElementById('corpoTabela');
-
-            tabela.innerHTML = '';
-
-            // Pegando os nomes dos municípios encontrados
-            const nomes = Object.keys(municipios);
-
-            // Atualizando o total
-            document.getElementById('total').textContent =
-                'Municípios encontrados: ' + nomes.length;
-
-            // Percorrendo os municípios
-            for (const nome of nomes) {
-
-                const dados = municipios[nome];
-
-                const linha = document.createElement('tr');
-
-                const colunaNome = document.createElement('td');
-                colunaNome.textContent = nome;
-
-                const colunaEstado = document.createElement('td');
-                colunaEstado.textContent = dados.estado;
-
-                const colunaUF = document.createElement('td');
-                colunaUF.textContent = dados.sigla_uf;
-
-                const colunaCapital = document.createElement('td');
-                colunaCapital.textContent = dados.capital ? 'Sim' : 'Não';
-
-                const colunaPopulacao = document.createElement('td');
-                colunaPopulacao.textContent =
-                    dados.populacao_estimada.toLocaleString('pt-BR');
-
-                const colunaAcoes = document.createElement('td');
-
-                const botaoEditar = document.createElement('button');
-                botaoEditar.textContent = 'Editar';
-                botaoEditar.className = 'editar';
-                botaoEditar.onclick = () => editarMunicipio(nome, dados);
-
-                const botaoExcluir = document.createElement('button');
-                botaoExcluir.textContent = 'Excluir';
-                botaoExcluir.className = 'excluir';
-                botaoExcluir.onclick = () => excluirMunicipio(nome);
-
-                colunaAcoes.appendChild(botaoEditar);
-                colunaAcoes.appendChild(botaoExcluir);
-
-                linha.appendChild(colunaNome);
-                linha.appendChild(colunaEstado);
-                linha.appendChild(colunaUF);
-                linha.appendChild(colunaCapital);
-                linha.appendChild(colunaPopulacao);
-                linha.appendChild(colunaAcoes);
-
-                tabela.appendChild(linha);
-            }
-        }
+            // Pesquisa digitada
+            const busca =
+                document.getElementById('filtroBusca')
+                    .value.trim();
 
 
-        // Cadastrar município
-        formulario.addEventListener('submit', async function(event) {
-
-            event.preventDefault();
-
-            const dados = {
-                nome: document.getElementById('nome').value.trim(),
-                id_ibge: Number(document.getElementById('id_ibge').value),
-                estado: document.getElementById('estado').value.trim(),
-                sigla_uf: document.getElementById('sigla_uf').value.trim().toUpperCase(),
-                capital: document.getElementById('capital').value === 'true',
-                populacao_estimada: Number(document.getElementById('populacao').value)
-            };
-
-            const resposta = await fetch('/municipios', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dados)
-            });
-
-            const resultado = await resposta.json();
-
-            mensagem.textContent = resultado.mensagem || resultado.erro;
-
-            if (resposta.ok) {
-                formulario.reset();
-                listarMunicipios();
-            }
-        });
+            // UF digitada
+            const uf =
+                document.getElementById('filtroUF')
+                    .value.trim().toUpperCase();
 
 
-        // Consultar e atualizar município
-        async function editarMunicipio(nome, dados) {
 
-            const novaPopulacao = prompt(
-                'Digite a nova população estimada de ' + nome + ':',
-                dados.populacao_estimada
-            );
+            try {
 
-            if (novaPopulacao === null || novaPopulacao.trim() === '') {
-                return;
-            }
 
-            const resposta = await fetch(
-                '/municipios/' + encodeURIComponent(nome),
-                {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        populacao_estimada: Number(novaPopulacao)
-                    })
+                // Busca todos os municípios
+                const respostaTodos =
+                    await fetch('/municipios');
+
+                const todosMunicipios =
+                    await respostaTodos.json();
+
+
+
+                // Atualiza o total geral
+                document.getElementById('totalGeral').textContent =
+                    Object.keys(todosMunicipios).length;
+
+
+
+                // Define o endereço da pesquisa
+                let endereco = '/municipios';
+
+
+                if (busca) {
+
+                    endereco +=
+                        '?busca=' + encodeURIComponent(busca);
+
                 }
-            );
 
-            const resultado = await resposta.json();
 
-            mensagem.textContent = resultado.mensagem || resultado.erro;
 
-            if (resposta.ok) {
-                listarMunicipios();
+                // Busca os municípios de acordo com o nome
+                const resposta =
+                    busca
+                    ? await fetch(endereco)
+                    : respostaTodos;
+
+
+                const municipios =
+                    await resposta.json();
+
+
+
+                // Tabela
+                const tabela =
+                    document.getElementById('corpoTabela');
+
+                tabela.innerHTML = '';
+
+
+
+                // Nomes dos municípios
+                let nomes =
+                    Object.keys(municipios);
+
+
+
+                // FILTRAR POR UF
+                if (uf) {
+
+                    nomes = nomes.filter(nome => {
+
+                        return municipios[nome]
+                            .sigla_uf
+                            .toUpperCase() === uf;
+
+                    });
+
+                }
+
+
+
+                // TOTAL ENCONTRADO
+                document.getElementById('total').textContent =
+                    'Municípios encontrados: ' + nomes.length;
+
+
+
+                // PERCORRER MUNICÍPIOS
+                for (const nome of nomes) {
+
+
+                    const dados = municipios[nome];
+
+                    const linha = document.createElement('tr');
+
+
+
+                    // NOME
+                    const colunaNome =
+                        document.createElement('td');
+
+                    colunaNome.textContent = nome;
+
+
+
+                    // UF
+                    const colunaUF =
+                        document.createElement('td');
+
+                    colunaUF.textContent =
+                        dados.sigla_uf;
+
+
+
+                    // CAPITAL
+                    const colunaCapital =
+                        document.createElement('td');
+
+                    colunaCapital.textContent =
+                        dados.capital ? 'Sim' : 'Não';
+
+
+
+                    // POPULAÇÃO
+                    const colunaPopulacao =
+                        document.createElement('td');
+
+                    colunaPopulacao.textContent =
+                        dados.populacao_estimada
+                            .toLocaleString('pt-BR');
+
+
+
+                    // ID IBGE
+                    const colunaID =
+                        document.createElement('td');
+
+                    colunaID.textContent =
+                        dados.id_ibge;
+
+
+
+                    // AÇÕES
+                    const colunaAcoes =
+                        document.createElement('td');
+
+                    colunaAcoes.className = 'acoes';
+
+
+
+                    // BOTÃO EDITAR
+                    const botaoEditar =
+                        document.createElement('button');
+
+                    botaoEditar.textContent = '✏';
+
+                    botaoEditar.className = 'editar';
+
+                    botaoEditar.title =
+                        'Editar município';
+
+                    botaoEditar.onclick = function() {
+
+                        editarMunicipio(nome, dados);
+
+                    };
+
+
+
+                    // BOTÃO EXCLUIR
+                    const botaoExcluir =
+                        document.createElement('button');
+
+                    botaoExcluir.textContent = '🗑';
+
+                    botaoExcluir.className = 'excluir';
+
+                    botaoExcluir.title =
+                        'Excluir município';
+
+                    botaoExcluir.onclick = function() {
+
+                        excluirMunicipio(nome);
+
+                    };
+
+
+
+                    // ADICIONAR BOTÕES
+                    colunaAcoes.appendChild(botaoEditar);
+
+                    colunaAcoes.appendChild(botaoExcluir);
+
+
+
+                    // ADICIONAR ELEMENTOS À LINHA
+                    linha.appendChild(colunaNome);
+
+                    linha.appendChild(colunaUF);
+
+                    linha.appendChild(colunaCapital);
+
+                    linha.appendChild(colunaPopulacao);
+
+                    linha.appendChild(colunaID);
+
+                    linha.appendChild(colunaAcoes);
+
+
+
+                    // ADICIONAR LINHA À TABELA
+                    tabela.appendChild(linha);
+
+                }
+
+
+            } catch (erro) {
+
+                mensagem.textContent =
+                    'Erro ao carregar municípios.';
+
+                console.error(erro);
+
             }
+
         }
 
 
-        // Excluir município
+
+        // CADASTRAR OU ATUALIZAR MUNICÍPIO
+        formulario.addEventListener(
+            'submit',
+            async function(event) {
+
+
+                event.preventDefault();
+
+
+
+                // Verifica se está editando
+                const nomeOriginal =
+                    document.getElementById('nomeOriginal')
+                        .value;
+
+
+
+                // Dados do formulário
+                const dados = {
+
+                    nome:
+                        document.getElementById('nome')
+                            .value.trim(),
+
+                    id_ibge:
+                        Number(
+                            document.getElementById('id_ibge')
+                                .value
+                        ),
+
+                    estado:
+                        document.getElementById('estado')
+                            .value.trim(),
+
+                    sigla_uf:
+                        document.getElementById('sigla_uf')
+                            .value.trim().toUpperCase(),
+
+                    capital:
+                        document.getElementById('capital')
+                            .checked,
+
+                    populacao_estimada:
+                        Number(
+                            document.getElementById('populacao')
+                                .value
+                        )
+
+                };
+
+
+
+                // Definição da rota e método
+                let endereco = '/municipios';
+
+                let metodo = 'POST';
+
+
+
+                // Se estiver editando
+                if (nomeOriginal) {
+
+
+                    endereco =
+                        '/municipios/' +
+                        encodeURIComponent(nomeOriginal);
+
+
+                    metodo = 'PATCH';
+
+
+                    // O nome não será alterado
+                    delete dados.nome;
+
+                }
+
+
+
+                try {
+
+
+                    // Enviar dados ao Flask
+                    const resposta = await fetch(
+                        endereco,
+                        {
+
+                            method: metodo,
+
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+
+                            body: JSON.stringify(dados)
+
+                        }
+                    );
+
+
+
+                    const resultado =
+                        await resposta.json();
+
+
+
+                    // Mensagem
+                    mensagem.textContent =
+                        resultado.mensagem || resultado.erro;
+
+
+
+                    // Se deu certo
+                    if (resposta.ok) {
+
+
+                        formulario.reset();
+
+
+                        document.getElementById('nomeOriginal')
+                            .value = '';
+
+
+                        document.getElementById('botaoSalvar')
+                            .textContent =
+                            'Salvar / Atualizar';
+
+
+                        listarMunicipios();
+
+                    }
+
+
+                } catch (erro) {
+
+                    mensagem.textContent =
+                        'Erro ao salvar município.';
+
+                    console.error(erro);
+
+                }
+
+            }
+        );
+
+
+
+
+        // BUSCAR MUNICÍPIO PELO NOME
+        async function buscarPorNome() {
+
+
+            const nome =
+                document.getElementById('nome')
+                    .value.trim();
+
+
+
+            if (!nome) {
+
+                mensagem.textContent =
+                    'Digite o nome do município para buscar.';
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                const resposta = await fetch(
+                    '/municipios/' +
+                    encodeURIComponent(nome)
+                );
+
+
+                const dados =
+                    await resposta.json();
+
+
+
+                if (!resposta.ok) {
+
+                    mensagem.textContent =
+                        dados.erro;
+
+                    return;
+
+                }
+
+
+
+                // Preencher formulário
+                preencherFormulario(nome, dados);
+
+
+                mensagem.textContent =
+                    'Município encontrado.';
+
+
+            } catch (erro) {
+
+                mensagem.textContent =
+                    'Erro ao buscar município.';
+
+                console.error(erro);
+
+            }
+
+        }
+
+
+
+
+        // PREENCHER FORMULÁRIO
+        function preencherFormulario(nome, dados) {
+
+
+            document.getElementById('nome').value =
+                nome;
+
+
+            document.getElementById('id_ibge').value =
+                dados.id_ibge;
+
+
+            document.getElementById('estado').value =
+                dados.estado;
+
+
+            document.getElementById('sigla_uf').value =
+                dados.sigla_uf;
+
+
+            document.getElementById('populacao').value =
+                dados.populacao_estimada;
+
+
+            document.getElementById('capital').checked =
+                dados.capital;
+
+
+
+            document.getElementById('nomeOriginal').value =
+                nome;
+
+
+
+            document.getElementById('botaoSalvar').textContent =
+                'Atualizar Município';
+
+        }
+
+
+
+
+        // EDITAR MUNICÍPIO
+        function editarMunicipio(nome, dados) {
+
+
+            preencherFormulario(nome, dados);
+
+
+            mensagem.textContent =
+                'Editando: ' + nome;
+
+        }
+
+
+
+
+        // EXCLUIR MUNICÍPIO
         async function excluirMunicipio(nome) {
+
 
             const confirmar = confirm(
                 'Deseja realmente excluir ' + nome + '?'
             );
 
+
             if (!confirmar) {
+
                 return;
+
             }
 
-            const resposta = await fetch(
-                '/municipios/' + encodeURIComponent(nome),
-                {
-                    method: 'DELETE'
+
+
+            try {
+
+
+                const resposta = await fetch(
+                    '/municipios/' +
+                    encodeURIComponent(nome),
+                    {
+                        method: 'DELETE'
+                    }
+                );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+
+                mensagem.textContent =
+                    resultado.mensagem || resultado.erro;
+
+
+
+                if (resposta.ok) {
+
+                    listarMunicipios();
+
                 }
+
+
+            } catch (erro) {
+
+                mensagem.textContent =
+                    'Erro ao excluir município.';
+
+                console.error(erro);
+
+            }
+
+        }
+
+
+
+
+        // NOVO CADASTRO
+        function novoMunicipio() {
+
+
+            formulario.reset();
+
+
+            document.getElementById('nomeOriginal')
+                .value = '';
+
+
+            document.getElementById('botaoSalvar')
+                .textContent =
+                'Salvar / Atualizar';
+
+
+            mensagem.textContent = '';
+
+        }
+
+
+
+
+        // PESQUISA AUTOMÁTICA
+        document.getElementById('filtroBusca')
+            .addEventListener(
+                'input',
+                listarMunicipios
             );
 
-            const resultado = await resposta.json();
-
-            mensagem.textContent = resultado.mensagem || resultado.erro;
-
-            if (resposta.ok) {
-                listarMunicipios();
-            }
-        }
 
 
-        // Limpar filtro
-        function limparFiltro() {
-            document.getElementById('filtroUF').value = '';
-            listarMunicipios();
-        }
+
+        // FILTRO AUTOMÁTICO POR UF
+        document.getElementById('filtroUF')
+            .addEventListener(
+                'input',
+                listarMunicipios
+            );
 
 
-        // Carregar os municípios quando a página abrir
+
+
+        // CARREGAR MUNICÍPIOS AO ABRIR A PÁGINA
         listarMunicipios();
+
 
     </script>
 
